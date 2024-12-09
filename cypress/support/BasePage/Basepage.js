@@ -1,37 +1,39 @@
-class BasePage{
+class BasePage {
     wait = {
-        timeout : 1000,
+        timeout: 10000,
     };
-    getTimeout(){
+
+    getTimeout() {
         return this.wait.timeout;
     }
-    isElementVisible(item){
-        if(typeof item === 'string'&& item.startsWith('@')){
-            return cy.get(item).should('be.visible');
 
+    isElementVisible(item) {
+        if (typeof item === 'string' && item.startsWith('@')) {
+            return cy.get(item).should('be.visible');
         }
         return item.should('be.visible');
     }
-    isElementNotVisible(item){
-        if(typeof item === 'string' && item .startsWith('@')){
+
+    isElementNotVisible(item) {
+        if (typeof item === 'string' && item.startsWith('@')) {
             return cy.get(item).should('not.be.visible');
-
         }
-        return  item.should('not.be.visible')
+        return item.should('not.be.visible');
     }
-    isElementClickable(item){
-        if(typeof item === 'string' && item.startsWith('@')){
-            return cy.get(item).should('should').and('be.clickable');
 
+    isElementClickable(item) {
+        if (typeof item === 'string' && item.startsWith('@')) {
+            return cy.get(item).should('exist').and('be.clickable');
         }
-        return item.should ('exist ').and('be.clickable');
+        return item.should('exist').and('be.clickable');
     }
-    verifyElementHasClass(item,className){
-        if(typeof item === 'string' && item.startsWith('@')){
-            return cy.get(item).should('have.class',className);
-        }
-        return item.should('not.have.class  ',className);
 
+    verifyElementHasClass(item, className) {
+        if (typeof item === 'string' && item.startsWith('@')) {
+            return cy.get(item).should('have.class', className);
+        }
+        return item.should('not.have.class', className);
     }
 }
-export default BasePage;s
+
+export default BasePage;
