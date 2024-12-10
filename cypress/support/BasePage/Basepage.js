@@ -23,9 +23,9 @@ class BasePage {
 
     isElementClickable(item) {
         if (typeof item === 'string' && item.startsWith('@')) {
-            return cy.get(item).should('exist').and('be.clickable');
+            return cy.get(item).should('exist').and('not.be.disabled');
         }
-        return item.should('exist').and('be.clickable');
+        return item.should('exist').and('not.be.disabled');
     }
 
     verifyElementHasClass(item, className) {
