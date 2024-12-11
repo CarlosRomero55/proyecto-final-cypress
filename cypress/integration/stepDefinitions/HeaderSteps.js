@@ -48,8 +48,8 @@ Given('I have items in my cart', () => {
     if (cartPage.isCartEmpty()) {
         cartPage.navigateToHomePage();
         homePage.clickRandomProduct();
-        ProductPage.addProductToCart();
-        ProductPage.navigateToCartPage();
+        productPage.addProductToCart();
+        productPage.navigateToCartPage();
     }
     cy.log('Cart is not empty');
 });
