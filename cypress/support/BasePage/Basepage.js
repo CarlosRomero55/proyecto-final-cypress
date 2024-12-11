@@ -1,7 +1,10 @@
 class BasePage {
-    wait = {
-        timeout: 10000,
-    };
+    constructor(navBar) {
+        this.navBar = navBar;
+        this.wait = {
+            timeout: 10000,
+        };
+    }
 
     getTimeout() {
         return this.wait.timeout;
@@ -33,6 +36,10 @@ class BasePage {
             return cy.get(item).should('have.class', className);
         }
         return item.should('not.have.class', className);
+    }
+
+    navigateToNavBarOption(option) {
+        this.navBar.clickNavOption(option);
     }
 }
 

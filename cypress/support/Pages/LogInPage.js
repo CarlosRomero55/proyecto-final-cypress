@@ -1,40 +1,75 @@
 import BasePage from "../BasePage/Basepage";
-class logInPage extends BasePage{
+import navBar from '../../support/pages/NavBar';
+
+class LogInPage extends BasePage {
     logInPageElements = {
-        logInLabel : '#logInModalLabel',
-        closeButton1 : 'logInModal > .close',
-        closeButton2 : 'logInModal > .btn-secondary',
-
+        logInLabel: '#logInModalLabel',
+        closeButton1: '#logInModal > .close',
+        closeButton2: '#logInModal > .btn-secondary',
     };
-    logInLabel(){
+
+    logInPageFormElements = {
+        usernameInput: '#loginusername',
+        passwordInput: '#loginpassword',
+    };
+
+    constructor() {
+        super(navBar);
+    }
+
+    logInLabel() {
         return cy.get(this.logInPageElements.logInLabel, {
-            timeout : super.getTimeout(),
-        });
-
-    }
-    closeButton1 () {
-        return cy.get(this.logInPageElements.closeButton1,{
-            timeout : super.getTimeout(),
-
-        });
-
-
-        
-    }
-    closeButton2 (){
-        return cy.get(this.logInPageElements.closeButton2,{
-            timeout : super.getTimeout(),
+            timeout: super.getTimeout(),
         });
     }
-    clickButton1(){
+    closeButton1() {
+        return cy.get(this.logInPageElements.closeButton1, {
+            timeout: super.getTimeout(),
+        });
+    }
+    closeButton2() {
+        return cy.get(this.logInPageElements.closeButton2, {
+            timeout: super.getTimeout(),
+        });
+    }
+
+    usernameInput() {
+        return cy.get(this.logInPageFormElements.usernameInput, {
+            timeout: super.getTimeout(),
+        });
+    }
+    passwordInput() {
+        return cy.get(this.logInPageFormElements.passwordInput, {
+            timeout: super.getTimeout(),
+        });
+    }
+
+    clickCloseButton1() {
         this.closeButton1().click();
     }
-    clickButton2 (){
+
+    clickCloseButton2() {
         this.closeButton2().click();
     }
+
     isLogInPageVisible(labelText) {
         super.isElementVisible(this.logInLabel());
-        this.logInLabel().should('contain.text',labelText);
+        this.logInLabel()
+            .invoke('text')
+            .then((text) => {
+                expect(text.trim()).to.equal(labelText.trim());
+            });
+    }
+
+    isLoginFormVisible() {
+        return () => {
+            super.isElementVisible(this.usernameInput());
+            super.isElementClickable(this.usernameInput());
+
+            super.isElementVisible(this.passwordInput());
+            super.isElementClickable(this.passwordInput());
+        };
     }
 }
-module.exports = new logInPage();
+
+module.exports = new LogInPage();

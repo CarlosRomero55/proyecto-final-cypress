@@ -1,5 +1,5 @@
-import BasePage from "../BasePage/Basepage";
-
+import BasePage from '../basePage/BasePage';
+import navBar from '../../support/pages/NavBar';
 
 class ContactsPage extends BasePage {
     contactsPageElements = {
@@ -7,6 +7,10 @@ class ContactsPage extends BasePage {
         closeButton1: '#exampleModal > .close',
         closeButton2: '#exampleModal > .btn-secondary',
     };
+
+    constructor() {
+        super(navBar);
+    }
 
     contactsLabel() {
         return cy.get(this.contactsPageElements.contactsLabel, {

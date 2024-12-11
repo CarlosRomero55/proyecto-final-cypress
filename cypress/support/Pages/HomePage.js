@@ -1,4 +1,5 @@
-import BasePage from "../BasePage/Basepage";
+import BasePage from '../basePage/BasePage';
+import navBar from '../../support/pages/NavBar';
 
 class HomePage extends BasePage {
     homePageCarouselElements = {
@@ -11,6 +12,10 @@ class HomePage extends BasePage {
     homePageProductGridElements = {
         productGrid: '#tbodyid',
     };
+
+    constructor() {
+        super(navBar);
+    }
 
     /* ATTRIBUTES */
     carousel() {
@@ -107,7 +112,7 @@ class HomePage extends BasePage {
     }
 
     //Functions for products
-    clickRandomProduct() {
+    clickAndSaveRandomProduct() {
         this.productGrid()
             .find('> div')
             .its('length')
@@ -145,6 +150,22 @@ class HomePage extends BasePage {
                     'cypress/fixtures/productDetails.json',
                     productDetail
                 );
+            });
+    }
+
+    clickRandomProduct() {
+        return this.productGrid()
+            .find('> div')
+            .its('length')
+            .then((length) => {
+                const randomIndex = Math.floor(Math.random() * length);
+
+                super.isElementVisible(this.productGrid());
+                this.productGrid()
+                    .find('> div')
+                    .eq(randomIndex)
+                    .find('.card-img-top')
+                    .click();
             });
     }
 }

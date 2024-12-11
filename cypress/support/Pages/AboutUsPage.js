@@ -1,25 +1,31 @@
-import BasePage from "../BasePage/Basepage";
-class ContactsPage extends BasePage {
-    contactsPageElements = {
-        contactsLabel: '#exampleModalLabel',
-        closeButton1: '#exampleModal > .close',
-        closeButton2: '#exampleModal > .btn-secondary',
+import BasePage from '../basePage/BasePage';
+import navBar from '../../support/pages/NavBar';
+
+class AboutUsPage extends BasePage {
+    aboutUsElements = {
+        aboutUsLabel: '#videoModalLabel',
+        closeButton1: '#videoModal > .close',
+        closeButton2: '#videoModal > .btn-secondary',
     };
 
-    contactsLabel() {
-        return cy.get(this.contactsPageElements.contactsLabel, {
+    constructor() {
+        super(navBar);
+    }
+
+    aboutUsLabel() {
+        return cy.get(this.aboutUsElements.aboutUsLabel, {
             timeout: super.getTimeout(),
         });
     }
 
     closeButton1() {
-        return cy.get(this.contactsPageElements.closeButton1, {
+        return cy.get(this.aboutUsElements.closeButton1, {
             timeout: super.getTimeout(),
         });
     }
 
     closeButton2() {
-        return cy.get(this.contactsPageElements.closeButton2, {
+        return cy.get(this.aboutUsElements.closeButton2, {
             timeout: super.getTimeout(),
         });
     }
@@ -32,10 +38,10 @@ class ContactsPage extends BasePage {
         this.closeButton2().click();
     }
 
-    isContactsPageVisible(labelText) {
-        super.isElementVisible(this.contactsLabel());
-        this.contactsLabel().should('contain.text', labelText);
+    isAboutUsPageVisible(labelText) {
+        super.isElementVisible(this.aboutUsLabel());
+        this.aboutUsLabel().should('contain.text', labelText);
     }
 }
 
-module.exports = new ContactsPage();
+module.exports = new AboutUsPage();
